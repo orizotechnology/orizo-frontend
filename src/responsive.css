@@ -1,0 +1,366 @@
+/* ─────────────────────────────────────────
+   Orizo — Responsive / Mobile styles
+   Breakpoints: 1024px (tablet), 768px (mobile)
+───────────────────────────────────────── */
+
+/* Utility classes used in components */
+.r-grid-2   { display: grid; grid-template-columns: 1fr 1fr; }
+.r-grid-3   { display: grid; grid-template-columns: repeat(3, 1fr); }
+.r-grid-4   { display: grid; grid-template-columns: repeat(4, 1fr); }
+.r-grid-1-2 { display: grid; grid-template-columns: 1fr 1.6fr; }
+.r-flex-row { display: flex; flex-direction: row; }
+.r-section  { padding: 96px 0; }
+.r-wrap     { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+/* ── Tablet (769px – 1024px) ── */
+@media (max-width: 1024px) {
+  .r-wrap {
+    padding: 0 32px !important;
+  }
+
+  /* Footer: 4-col → 2-col on tablet */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px !important;
+  }
+
+  footer > div > div {
+    padding: 48px 32px !important;
+  }
+
+  footer > div:last-child > div {
+    padding: 16px 32px !important;
+  }
+
+  /* Services: 4-col → 2-col on tablet */
+  .services-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Why us: 3-col → 2-col on tablet */
+  .whyus-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Values: 3-col → 2-col on tablet */
+  .values-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Help cards: 3-col → 2-col on tablet */
+  .help-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Contact grid: narrow on tablet */
+  .contact-grid {
+    grid-template-columns: 1fr 1.3fr !important;
+    gap: 40px !important;
+  }
+
+  /* Story grid: reduce gap on tablet */
+  .story-grid {
+    gap: 48px !important;
+  }
+
+  /* Page banner padding */
+  .page-banner {
+    padding: 72px 32px 72px !important;
+  }
+
+  /* Hero headline */
+  .hero-h1 {
+    font-size: 52px !important;
+  }
+
+  /* Section headings */
+  .section-h2 {
+    font-size: 32px !important;
+  }
+}
+
+/* ── Mobile (≤ 768px) ── */
+@media (max-width: 768px) {
+  .r-wrap {
+    padding: 0 20px !important;
+  }
+
+  .r-section {
+    padding: 56px 0 !important;
+  }
+
+  .r-grid-2,
+  .r-grid-3,
+  .r-grid-4,
+  .r-grid-1-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .r-flex-row {
+    flex-direction: column !important;
+  }
+
+  /* Navbar — hide links on mobile, show hamburger */
+  .nav-links {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  .mobile-menu {
+    display: flex !important;
+  }
+
+  nav > div {
+    padding: 0 20px !important;
+  }
+
+  /* Hero headline */
+  .hero-h1 {
+    font-size: 30px !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  /* Hero content padding */
+  .hero-content-wrap {
+    padding: 0 20px 64px !important;
+  }
+
+  /* Section headings */
+  .section-h2 {
+    font-size: 26px !important;
+  }
+
+  /* ── Footer ── */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  footer > div > div {
+    padding: 40px 20px !important;
+  }
+
+  footer > div:last-child > div {
+    padding: 16px 20px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  /* Stats — 2 col */
+  .stats-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .stats-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  /* Contact form 2-col → 1-col */
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Vision/Mission side by side → stacked */
+  .vm-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About story grid */
+  .story-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* CTA button rows */
+  .cta-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .cta-row a,
+  .cta-row button {
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Section header flex rows */
+  .section-header-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  /* Career job card details grid */
+  .job-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Career filter bar */
+  .career-filter-bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .career-filter-bar > div {
+    flex-wrap: wrap !important;
+  }
+
+  /* Contact info + form grid */
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Help cards grid */
+  .help-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Values grid */
+  .values-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Why us grid */
+  .whyus-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Services grid */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Founders grid */
+  .founders-grid {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+  }
+
+  /* Slide dots */
+  .slide-dots {
+    bottom: 16px !important;
+  }
+
+  /* Banner padding */
+  .page-banner {
+    padding: 72px 20px 48px !important;
+  }
+
+  /* Page banner headings */
+  .page-banner h1 {
+    font-size: 32px !important;
+    letter-spacing: -0.5px !important;
+  }
+
+  /* StartJourney section heading */
+  .journey-heading {
+    font-size: 30px !important;
+  }
+
+  /* Careers section header */
+  .careers-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .careers-header p {
+    padding-top: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Careers job grid */
+  .careers-job-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About stat cards inner grid */
+  .about-stat-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Section padding reduction */
+  section[style*="padding: 96px 0"] {
+    padding: 56px 0 !important;
+  }
+
+  /* Open application box padding */
+  .open-application-box {
+    padding: 32px 20px !important;
+  }
+
+  /* StartJourney section padding */
+  .journey-section {
+    padding: 64px 0 !important;
+  }
+
+  /* Reduce large font sizes in CTA sections */
+  .journey-heading {
+    font-size: 30px !important;
+    letter-spacing: -0.3px !important;
+  }
+
+  /* About CTA heading */
+  .about-cta-heading {
+    font-size: 30px !important;
+  }
+
+  /* Contact form padding on mobile */
+  .contact-form-box {
+    padding: 24px 20px !important;
+  }
+
+  /* Apply page form padding */
+  .apply-form-box {
+    padding: 24px 20px !important;
+  }
+}
+
+/* ── Footer hover effects ── */
+footer a:hover {
+  color: #2563EB !important;
+  transition: color 0.2s ease;
+}
+
+footer a {
+  transition: color 0.2s ease;
+}
+
+/* Social icon hover */
+footer div > a:hover {
+  background: #2563EB !important;
+  color: #fff !important;
+}
+
+/* ── Scroll reveal animation ── */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: revealUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Stagger delays */
+.reveal-1 { animation-delay: 0.05s; }
+.reveal-2 { animation-delay: 0.12s; }
+.reveal-3 { animation-delay: 0.19s; }
+.reveal-4 { animation-delay: 0.26s; }
+
