@@ -9,6 +9,14 @@ export default function Preloader() {
   })
 
   const [phase, setPhase] = useState('in')
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   useEffect(() => {
     if (!show) return
@@ -24,6 +32,9 @@ export default function Preloader() {
     <div style={{
       position: "fixed", inset: 0, zIndex: 9999,
       background: "#071A3D",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
       opacity: phase === 'out' ? 0 : 1,
       transition: "opacity 0.8s ease",
     }}>
@@ -31,11 +42,14 @@ export default function Preloader() {
         src="/tech.png"
         alt="Orizo"
         style={{
-          position: "absolute", inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: "center",
+          // On mobile: contain so nothing is cropped, centered in the dark bg
+          // On desktop: cover to fill the full screen as before
+          width: isMobile ? "auto" : "100%",
+          height: isMobile ? "auto" : "100%",
+          maxWidth: isMobile ? "100%" : "none",
+          maxHeight: isMobile ? "100%" : "none",
+          objectFit: isMobile ? "contain" : "cover",
+          objectPosition: "center center",
           opacity: phase === 'in' ? 0 : 1,
           transition: "opacity 0.5s ease",
         }}
