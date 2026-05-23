@@ -128,13 +128,31 @@ function FounderCard({ f, i }) {
 }
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" })
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" })
+  const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
 
-  const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handle = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+    setErrors({ ...errors, [e.target.name]: "" })
+  }
+
+  const validate = () => {
+    const e = {}
+    if (!form.name.trim())    e.name    = "Full name is required"
+    if (!form.email.trim())   e.email   = "Email is required"
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email"
+    if (!form.phone.trim())   e.phone   = "Mobile number is required"
+    else if (!/^[0-9+\s\-()]{7,15}$/.test(form.phone.trim())) e.phone = "Enter a valid mobile number"
+    if (!form.subject.trim()) e.subject = "Subject is required"
+    if (!form.message.trim()) e.message = "Message is required"
+    return e
+  }
 
   const submit = async (e) => {
     e.preventDefault()
+    const errs = validate()
+    if (Object.keys(errs).length) { setErrors(errs); return }
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
@@ -271,23 +289,32 @@ export default function Contact() {
                 <form onSubmit={submit} style={{ background: "#fff", borderRadius: "16px", border: "1px solid #e2e8f0", padding: "40px" }} className="contact-form-box">
                   <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
                     <div>
-                      <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Full Name</label>
-                      <input name="name" value={form.name} onChange={handle} required placeholder="John Smith" style={input()} />
+                      <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Full Name <span style={{ color: "red" }}>*</span></label>
+                      <input name="name" value={form.name} onChange={handle} placeholder="John Smith" style={input({ borderColor: errors.name ? "#ef4444" : "#e2e8f0" })} />
+                      {errors.name && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.name}</p>}
                     </div>
                     <div>
-                      <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Email Address</label>
-                      <input name="email" type="email" value={form.email} onChange={handle} required placeholder="john@company.com" style={input()} />
+                      <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Email Address <span style={{ color: "red" }}>*</span></label>
+                      <input name="email" type="email" value={form.email} onChange={handle} placeholder="john@company.com" style={input({ borderColor: errors.email ? "#ef4444" : "#e2e8f0" })} />
+                      {errors.email && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.email}</p>}
                     </div>
                   </div>
                   <div style={{ marginBottom: "16px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Subject</label>
-                    <input name="subject" value={form.subject} onChange={handle} required placeholder="What's this about?" style={input()} />
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Mobile Number <span style={{ color: "red" }}>*</span></label>
+                    <input name="phone" value={form.phone} onChange={handle} placeholder="+91 98765 43210" style={input({ borderColor: errors.phone ? "#ef4444" : "#e2e8f0" })} />
+                    {errors.phone && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.phone}</p>}
+                  </div>
+                  <div style={{ marginBottom: "16px" }}>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Subject <span style={{ color: "red" }}>*</span></label>
+                    <input name="subject" value={form.subject} onChange={handle} placeholder="What's this about?" style={input({ borderColor: errors.subject ? "#ef4444" : "#e2e8f0" })} />
+                    {errors.subject && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.subject}</p>}
                   </div>
                   <div style={{ marginBottom: "24px" }}>
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Message</label>
-                    <textarea name="message" value={form.message} onChange={handle} required rows={5}
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Message <span style={{ color: "red" }}>*</span></label>
+                    <textarea name="message" value={form.message} onChange={handle} rows={5}
                       placeholder="Tell us about your project, timeline, and budget..."
-                      style={input({ resize: "vertical", minHeight: "130px" })} />
+                      style={input({ resize: "vertical", minHeight: "130px", borderColor: errors.message ? "#ef4444" : "#e2e8f0" })} />
+                    {errors.message && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.message}</p>}
                   </div>
                   <button type="submit" style={{
                     width: "100%", background: C.blue, color: "#fff",

@@ -26,11 +26,28 @@ export default function Apply() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", linkedin: "", message: "" })
   const [resume, setResume] = useState(null)
   const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState({})
 
-  const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handle = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+    setErrors({ ...errors, [e.target.name]: "" })
+  }
+
+  const validate = () => {
+    const e = {}
+    if (!form.name.trim())  e.name  = "Full name is required"
+    if (!form.email.trim()) e.email = "Email is required"
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email"
+    if (!form.phone.trim()) e.phone = "Mobile number is required"
+    else if (!/^[0-9+\s\-()]{7,15}$/.test(form.phone.trim())) e.phone = "Enter a valid mobile number"
+    if (!resume)            e.resume = "Resume is required"
+    return e
+  }
 
   const submit = async (e) => {
     e.preventDefault()
+    const errs = validate()
+    if (Object.keys(errs).length) { setErrors(errs); return }
     const data = new FormData()
     data.append('name',     form.name)
     data.append('email',    form.email)
@@ -121,19 +138,22 @@ export default function Apply() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }} className="form-grid">
                 <div>
                   <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Full Name <span style={{ color: "red" }}>*</span></label>
-                  <input name="name" value={form.name} onChange={handle} required placeholder="John Smith" style={input()} />
+                  <input name="name" value={form.name} onChange={handle} placeholder="John Smith" style={input({ borderColor: errors.name ? "#ef4444" : "#e2e8f0" })} />
+                  {errors.name && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.name}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Email Address <span style={{ color: "red" }}>*</span></label>
-                  <input name="email" type="email" value={form.email} onChange={handle} required placeholder="john@email.com" style={input()} />
+                  <input name="email" type="email" value={form.email} onChange={handle} placeholder="john@email.com" style={input({ borderColor: errors.email ? "#ef4444" : "#e2e8f0" })} />
+                  {errors.email && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.email}</p>}
                 </div>
               </div>
 
               {/* Phone + LinkedIn */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }} className="form-grid">
                 <div>
-                  <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Phone Number</label>
-                  <input name="phone" value={form.phone} onChange={handle} placeholder="+91 " style={input()} />
+                  <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>Mobile Number <span style={{ color: "red" }}>*</span></label>
+                  <input name="phone" value={form.phone} onChange={handle} placeholder="+91 98765 43210" style={input({ borderColor: errors.phone ? "#ef4444" : "#e2e8f0" })} />
+                  {errors.phone && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.phone}</p>}
                 </div>
                 <div>
                   <label style={{ fontSize: "13px", fontWeight: 600, color: C.navy, display: "block", marginBottom: "6px" }}>LinkedIn Profile</label>
@@ -156,7 +176,7 @@ export default function Apply() {
                 </label>
                 <label style={{
                   display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "8px",
-                  border: "2px dashed #e2e8f0", borderRadius: "10px", padding: "28px 20px",
+                  border: `2px dashed ${errors.resume ? "#ef4444" : "#e2e8f0"}`, borderRadius: "10px", padding: "28px 20px",
                   cursor: "pointer", background: resume ? "#f0fdf4" : "#f8fafc",
                   transition: "border-color 0.2s",
                 }}>
@@ -167,8 +187,9 @@ export default function Apply() {
                     {resume ? resume.name : "Click to upload your resume"}
                   </span>
                   <span style={{ fontSize: "12px", color: "#94a3b8" }}>PDF, DOC, DOCX — max 5MB</span>
-                  <input type="file" accept=".pdf,.doc,.docx" required onChange={(e) => setResume(e.target.files[0])} style={{ display: "none" }} />
+                  <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => { setResume(e.target.files[0]); setErrors({ ...errors, resume: "" }) }} style={{ display: "none" }} />
                 </label>
+                {errors.resume && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.resume}</p>}
               </div>
 
               {/* Submit */}
