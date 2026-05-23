@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="r-section" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "flex-end", background: "#050d1a", overflow: "hidden", marginTop: 0, paddingTop: 0 }}>
+      <section className="r-section" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", background: "#050d1a", overflow: "hidden", marginTop: 0, paddingTop: 0 }}>
 
         {/* ── Slideshow BG ── */}
         {prev !== null && (
@@ -55,7 +55,7 @@ export default function Hero() {
 
         {/* ── Text content ── */}
         <div style={{ position: "relative", zIndex: 3, width: "100%" }}>
-          <div className="r-wrap hero-content-wrap" style={{ ...C.wrap, padding: "0 48px 80px" }}>
+          <div className="r-wrap hero-content-wrap" style={{ ...C.wrap, padding: "120px 48px 80px" }}>
             <div style={{ maxWidth: "780px" }}>
 
               <motion.p

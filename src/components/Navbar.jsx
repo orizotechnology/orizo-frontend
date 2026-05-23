@@ -48,8 +48,7 @@ export default function Navbar() {
       }}>
         {/* Logo */}
         <Link to="/" style={{ display: "inline-flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-          <img src="/logo.png" alt="Orizo" style={{ width: "40px", height: "40px", borderRadius: "8px", objectFit: "cover", display: "block", flexShrink: 0 }} />
-          <span style={{ color: "#fff", fontWeight: 700, fontSize: "28px", letterSpacing: "-0.3px", lineHeight: 1 }}>Orizo</span>
+          <img src="/logo.png" alt="Orizo" style={{ height: "38px", width: "auto", objectFit: "contain", display: "block", flexShrink: 0 }} />
         </Link>
 
         {/* Desktop links */}
