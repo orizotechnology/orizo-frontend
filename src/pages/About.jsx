@@ -197,8 +197,8 @@ export default function About() {
               <span>//</span> Vision & Mission
             </p>
             <h2 style={{ fontSize: "38px", fontWeight: 800, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.5px" }}>
-              Where We're Going &{" "}
-              <span style={{ color: C.blue }}>Why We're Going There</span>
+              Building Tomorrow's{" "}
+              <span style={{ color: C.blue }}>Technology, Today</span>
             </h2>
           </motion.div>
 
