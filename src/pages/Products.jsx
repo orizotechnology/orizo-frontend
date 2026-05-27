@@ -111,11 +111,11 @@ export default function Products() {
               {/* Icon + name */}
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
                 <div style={{
-                  width: "38px", height: "38px", borderRadius: "9px",
-                  background: C.navy, flexShrink: 0,
-                  display: "flex", alignItems: "center", justifyContent: "center",
+                  width: "44px", height: "44px", borderRadius: "10px",
+                  overflow: "hidden",
+                  flexShrink: 0,
                 }}>
-                  <img src="/dqr.ico" alt="DQR" style={{ width: "26px", height: "26px", objectFit: "contain" }} />
+                  <img src="/dqr.ico" alt="DQR" style={{ width: "44px", height: "44px", objectFit: "cover", display: "block" }} />
                 </div>
                 <div>
                   <h3 style={{ fontSize: "17px", fontWeight: 800, color: C.navy, margin: 0, lineHeight: 1.2 }}>DQR</h3>
