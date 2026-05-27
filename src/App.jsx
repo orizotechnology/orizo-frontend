@@ -1,7 +1,6 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import ScrollToTop from './components/ui/ScrollToTop'
-import Preloader from './components/ui/Preloader'
 import Footer from './components/Footer'
 import Hero from './components/sections/Hero'
 import ServicesSection from './components/sections/ServicesSection'
@@ -12,6 +11,7 @@ import About from './pages/About'
 import CareerPage from './pages/Career'
 import Contact from './pages/Contact'
 import Apply from './pages/Apply'
+import Products from './pages/Products'
 import './App.css'
 import './responsive.css'
 
@@ -32,7 +32,6 @@ function App() {
 
   return (
     <>
-      <Preloader />
       <ScrollToTop />
       {!isApply && <Navbar />}
       <main style={{ margin: 0, padding: 0, display: "block" }}>
@@ -42,6 +41,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/career" element={<CareerPage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/apply" element={<Apply />} />
         </Routes>
       </main>

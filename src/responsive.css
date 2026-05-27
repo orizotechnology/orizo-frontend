@@ -37,6 +37,11 @@
     grid-template-columns: 1fr 1fr !important;
   }
 
+  /* Products features: 3-col → 2-col on tablet */
+  .features-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
   /* Why us: 3-col → 2-col on tablet */
   .whyus-grid {
     grid-template-columns: 1fr 1fr !important;
@@ -236,6 +241,11 @@
 
   /* Services grid */
   .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Products features grid */
+  .features-grid {
     grid-template-columns: 1fr !important;
   }
 
