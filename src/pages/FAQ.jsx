@@ -101,45 +101,44 @@ export default function FAQ() {
   const navigate = useNavigate()
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh", paddingTop: "40px" }}>
+    <div style={{ background: "#fff", minHeight: "100vh" }}>
 
-      {/* Back button */}
-      <div style={{ ...C.wrap, marginBottom: "0" }}>
-        <motion.button
-          {...fade(0)}
-          onClick={() => navigate(-1)}
-          style={{
-            display: "inline-flex", alignItems: "center", gap: "6px",
-            background: "none", border: "none", cursor: "pointer",
-            color: "#64748b", fontSize: "13px", fontWeight: 500,
-            padding: "0", marginBottom: "40px",
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = C.navy}
-          onMouseLeave={e => e.currentTarget.style.color = "#64748b"}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
-            viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-          Back
-        </motion.button>
-      </div>
-
-      {/* Content */}
-      <div style={{ ...C.wrap, paddingBottom: "96px" }}>
-        <motion.div {...fade(0.05)} style={{ marginBottom: "48px" }}>
-          <p style={{ color: C.blue, fontSize: "13px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "10px" }}>
+      {/* ── DARK BANNER ── */}
+      <div style={{ background: "#0a1628" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", padding: "32px 48px 40px" }}>
+          <button
+            onClick={() => navigate(-1)}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "6px",
+              background: "none", border: "none", cursor: "pointer",
+              color: "rgba(255,255,255,0.45)", fontSize: "13px", fontWeight: 500,
+              padding: "0", marginBottom: "28px",
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = "#fff"}
+            onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.45)"}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </button>
+          <p style={{ color: "#2563EB", fontSize: "13px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "10px" }}>
             Support
           </p>
-          <h1 style={{ fontSize: "36px", fontWeight: 800, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.5px", marginBottom: "12px" }}>
+          <h1 style={{ color: "#fff", fontSize: "38px", fontWeight: 800, lineHeight: 1.15, letterSpacing: "-0.5px", marginBottom: "12px" }}>
             Frequently Asked Questions
           </h1>
-          <p style={{ fontSize: "15px", color: "#64748b", lineHeight: 1.75 }}>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "15px", lineHeight: 1.75 }}>
             Everything you need to know about working with Orizo.
-            Can't find an answer? <a href="/contact" style={{ color: C.blue, textDecoration: "none", fontWeight: 500 }}>Reach out</a>.
+            Can't find an answer?{" "}
+            <a href="/contact" style={{ color: "#60a5fa", textDecoration: "none" }}>Reach out</a>.
           </p>
-        </motion.div>
+        </div>
+      </div>
 
+      {/* ── FAQ LIST ── */}
+      <div style={{ maxWidth: "760px", margin: "0 auto", padding: "64px 48px 96px" }}>
         <div style={{ borderTop: "1px solid #e2e8f0" }}>
           {faqs.map((item, i) => (
             <FAQItem key={item.q} item={item} index={i} />
