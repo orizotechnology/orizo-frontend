@@ -12,6 +12,9 @@ import CareerPage from './pages/Career'
 import Contact from './pages/Contact'
 import Apply from './pages/Apply'
 import Products from './pages/Products'
+import FAQ from './pages/FAQ'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import Terms from './pages/Terms'
 import './App.css'
 import './responsive.css'
 
@@ -42,6 +45,9 @@ function App() {
           <Route path="/career" element={<CareerPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/apply" element={<Apply />} />
         </Routes>
       </main>

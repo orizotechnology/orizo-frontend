@@ -239,6 +239,11 @@
     grid-template-columns: 1fr !important;
   }
 
+  /* Products card — full width on mobile */
+  .product-card {
+    width: 100% !important;
+  }
+
   /* Services grid */
   .services-grid {
     grid-template-columns: 1fr !important;

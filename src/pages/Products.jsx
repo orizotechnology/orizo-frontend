@@ -95,6 +95,7 @@ export default function Products() {
             {/* ── DQR Card ── */}
             <motion.div
               {...fade(0.1)}
+              className="product-card"
               style={{
                 background: "#fff",
                 border: "1px solid #e2e8f0",
