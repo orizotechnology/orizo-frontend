@@ -32,11 +32,13 @@ function HomePage() {
 function App() {
   const location = useLocation()
   const isApply = location.pathname === '/apply'
+  const isLegal = ['/faq', '/privacy-policy', '/terms'].includes(location.pathname)
+  const hideChrome = isApply || isLegal
 
   return (
     <>
       <ScrollToTop />
-      {!isApply && <Navbar />}
+      {!hideChrome && <Navbar />}
       <main style={{ margin: 0, padding: 0, display: "block" }}>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -51,7 +53,7 @@ function App() {
           <Route path="/apply" element={<Apply />} />
         </Routes>
       </main>
-      {!isApply && <Footer />}
+      {!hideChrome && <Footer />}
     </>
   )
 }
