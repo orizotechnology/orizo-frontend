@@ -50,7 +50,7 @@ const sections = [
   },
   {
     title: "Contact",
-    body: `For questions about these Terms, contact us at:\n\nOrizo Technologies\nEmail: legal@orizo.in`,
+    body: `For questions about these Terms, contact us at:\n\nOrizo Technologies\nEmail: orizotechnology@gmail.com`,
   },
 ]
 

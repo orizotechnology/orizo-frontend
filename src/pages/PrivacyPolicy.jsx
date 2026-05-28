@@ -46,7 +46,7 @@ const sections = [
   },
   {
     title: "Contact Us",
-    body: `If you have any questions about this Privacy Policy or how we handle your data, please contact us at:\n\nOrizo Technologies\nEmail: privacy@orizo.in`,
+    body: `If you have any questions about this Privacy Policy or how we handle your data, please contact us at:\n\nOrizo Technologies\nEmail: orizotechnology@gmail.com`,
   },
 ]
 

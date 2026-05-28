@@ -117,7 +117,7 @@ function JobCard({ job, i }) {
         <p style={{ fontSize: "13.5px", color: "#64748b", lineHeight: 1.7, margin: 0 }}>{job.desc}</p>
 
         {/* apply */}
-        <a href="mailto:careers@Orizo.com" style={{
+        <a href="mailto:orizotechnology@gmail.com" style={{
           display: "inline-flex", alignItems: "center", gap: "6px",
           color: C.blue, fontSize: "13px", fontWeight: 600, textDecoration: "none",
           marginTop: "4px",
@@ -167,7 +167,7 @@ export default function Careers() {
             <p style={{ fontSize: "15px", color: "#64748b", marginBottom: "16px" }}>
               Don't see a role that fits? We'd still love to hear from you.
             </p>
-            <a href="mailto:careers@Orizo.com" style={{
+            <a href="mailto:orizotechnology@gmail.com" style={{
               display: "inline-flex", alignItems: "center", gap: "8px",
               background: C.blue, color: "#fff",
               fontSize: "15px", fontWeight: 600,
