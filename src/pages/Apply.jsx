@@ -3,6 +3,8 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
+
 const C = {
   wrap: { maxWidth: "680px", margin: "0 auto", padding: "0 24px" },
   navy: "#0a1628",
@@ -29,6 +31,7 @@ export default function Apply() {
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
   const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState("")
 
   const handle = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -51,6 +54,7 @@ export default function Apply() {
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
     setSending(true)
+    setSendError("")
     try {
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -63,14 +67,16 @@ export default function Apply() {
           role:        role,
           message:     form.message || 'No cover note provided',
           resume_name: resume ? resume.name : 'Not attached',
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+          to_email:    'orizotechnology@gmail.com',
+        }
       )
+      setSubmitted(true)
     } catch (err) {
       console.error('EmailJS error:', err)
+      setSendError("Something went wrong. Please try again or email us at orizotechnology@gmail.com")
+    } finally {
+      setSending(false)
     }
-    setSending(false)
-    setSubmitted(true)
   }
 
   return (
@@ -219,6 +225,11 @@ export default function Apply() {
                 )}
               </button>
 
+              {sendError && (
+                <p style={{ fontSize: "13px", color: "#ef4444", marginTop: "12px", textAlign: "center" }}>
+                  {sendError}
+                </p>
+              )}
             </form>
           </motion.div>
         )}

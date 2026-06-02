@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
+
 const C = {
   wrap: { maxWidth: "1100px", margin: "0 auto", padding: "0 48px" },
   navy: "#0a1628",
@@ -133,6 +135,7 @@ export default function Contact() {
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
+  const [sendError, setSendError] = useState("")
 
   const handle = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -156,6 +159,7 @@ export default function Contact() {
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
     setSending(true)
+    setSendError("")
     try {
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -166,14 +170,16 @@ export default function Contact() {
           phone:      form.phone,
           subject:    form.subject,
           message:    form.message,
-        },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+          to_email:   'orizotechnology@gmail.com',
+        }
       )
+      setSent(true)
     } catch (err) {
       console.error('EmailJS error:', err)
+      setSendError("Something went wrong. Please try again or email us directly at orizotechnology@gmail.com")
+    } finally {
+      setSending(false)
     }
-    setSending(false)
-    setSent(true)
   }
 
   const input = (extra = {}) => ({
@@ -344,6 +350,11 @@ export default function Contact() {
                       </svg>
                     )}
                   </button>
+                  {sendError && (
+                    <p style={{ fontSize: "13px", color: "#ef4444", marginTop: "12px", textAlign: "center" }}>
+                      {sendError}
+                    </p>
+                  )}
                 </form>
               )}
             </motion.div>
