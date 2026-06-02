@@ -3,7 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
-emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
+emailjs.init('PaqpB2lkbVSTH-bIZ')
 
 const C = {
   wrap: { maxWidth: "680px", margin: "0 auto", padding: "0 24px" },
@@ -57,8 +57,8 @@ export default function Apply() {
     setSendError("")
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_CAREER_TEMPLATE,
+        'service_x1q5s9l',
+        'template_h8mjq5s',
         {
           from_name:   form.name,
           from_email:  form.email,
@@ -68,11 +68,14 @@ export default function Apply() {
           message:     form.message || 'No cover note provided',
           resume_name: resume ? resume.name : 'Not attached',
           to_email:    'orizotechnology@gmail.com',
-        }
+        },
+        'PaqpB2lkbVSTH-bIZ'
       )
       setSubmitted(true)
     } catch (err) {
-      console.error('EmailJS error:', err)
+      console.error('EmailJS error status:', err?.status)
+      console.error('EmailJS error text:', err?.text)
+      console.error('EmailJS full error:', err)
       setSendError("Something went wrong. Please try again or email us at orizotechnology@gmail.com")
     } finally {
       setSending(false)

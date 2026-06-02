@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 
-emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY)
+emailjs.init('PaqpB2lkbVSTH-bIZ')
 
 const C = {
   wrap: { maxWidth: "1100px", margin: "0 auto", padding: "0 48px" },
@@ -162,8 +162,8 @@ export default function Contact() {
     setSendError("")
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE,
+        'service_x1q5s9l',
+        'template_lky36ok',
         {
           from_name:  form.name,
           from_email: form.email,
@@ -171,11 +171,14 @@ export default function Contact() {
           subject:    form.subject,
           message:    form.message,
           to_email:   'orizotechnology@gmail.com',
-        }
+        },
+        'PaqpB2lkbVSTH-bIZ'
       )
       setSent(true)
     } catch (err) {
-      console.error('EmailJS error:', err)
+      console.error('EmailJS error status:', err?.status)
+      console.error('EmailJS error text:', err?.text)
+      console.error('EmailJS full error:', err)
       setSendError("Something went wrong. Please try again or email us directly at orizotechnology@gmail.com")
     } finally {
       setSending(false)
