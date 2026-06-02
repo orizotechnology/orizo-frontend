@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 const C = {
   wrap: { maxWidth: "680px", margin: "0 auto", padding: "0 24px" },
@@ -27,6 +28,7 @@ export default function Apply() {
   const [resume, setResume] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState({})
+  const [sending, setSending] = useState(false)
 
   const handle = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -48,18 +50,26 @@ export default function Apply() {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
-    const data = new FormData()
-    data.append('name',     form.name)
-    data.append('email',    form.email)
-    data.append('phone',    form.phone)
-    data.append('linkedin', form.linkedin)
-    data.append('role',     role)
-    data.append('message',  form.message)
-    if (resume) data.append('resume', resume)
-
+    setSending(true)
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/applications`, { method: 'POST', body: data })
-    } catch (_) { /* still show success even if backend is down during dev */ }
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_CAREER_TEMPLATE,
+        {
+          from_name:   form.name,
+          from_email:  form.email,
+          phone:       form.phone,
+          linkedin:    form.linkedin || 'Not provided',
+          role:        role,
+          message:     form.message || 'No cover note provided',
+          resume_name: resume ? resume.name : 'Not attached',
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+    } catch (err) {
+      console.error('EmailJS error:', err)
+    }
+    setSending(false)
     setSubmitted(true)
   }
 
@@ -193,17 +203,20 @@ export default function Apply() {
               </div>
 
               {/* Submit */}
-              <button type="submit" style={{
-                width: "100%", background: C.blue, color: "#fff",
+              <button type="submit" disabled={sending} style={{
+                width: "100%", background: sending ? "#93c5fd" : C.blue, color: "#fff",
                 fontSize: "15px", fontWeight: 600,
                 padding: "13px", borderRadius: "8px",
-                border: "none", cursor: "pointer",
+                border: "none", cursor: sending ? "not-allowed" : "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                transition: "background 0.2s ease",
               }}>
-                Submit Application
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                {sending ? "Submitting..." : "Submit Application"}
+                {!sending && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                )}
               </button>
 
             </form>

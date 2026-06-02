@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 const C = {
   wrap: { maxWidth: "1100px", margin: "0 auto", padding: "0 48px" },
@@ -131,6 +132,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" })
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
 
   const handle = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -153,13 +155,24 @@ export default function Contact() {
     e.preventDefault()
     const errs = validate()
     if (Object.keys(errs).length) { setErrors(errs); return }
+    setSending(true)
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-    } catch (_) { /* show success even if backend is down during dev */ }
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_CONTACT_TEMPLATE,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          phone:      form.phone,
+          subject:    form.subject,
+          message:    form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
+    } catch (err) {
+      console.error('EmailJS error:', err)
+    }
+    setSending(false)
     setSent(true)
   }
 
@@ -316,17 +329,20 @@ export default function Contact() {
                       style={input({ resize: "vertical", minHeight: "130px", borderColor: errors.message ? "#ef4444" : "#e2e8f0" })} />
                     {errors.message && <p style={{ fontSize: "12px", color: "#ef4444", marginTop: "4px" }}>{errors.message}</p>}
                   </div>
-                  <button type="submit" style={{
-                    width: "100%", background: C.blue, color: "#fff",
+                  <button type="submit" disabled={sending} style={{
+                    width: "100%", background: sending ? "#93c5fd" : C.blue, color: "#fff",
                     fontSize: "15px", fontWeight: 600,
                     padding: "13px", borderRadius: "8px",
-                    border: "none", cursor: "pointer",
+                    border: "none", cursor: sending ? "not-allowed" : "pointer",
                     display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                    transition: "background 0.2s ease",
                   }}>
-                    Send Message
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    {sending ? "Sending..." : "Send Message"}
+                    {!sending && (
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    )}
                   </button>
                 </form>
               )}
