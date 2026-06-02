@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# ── SPA routing fix ──
+# Without this, refreshing /about, /contact etc. returns a 404 on Netlify
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
