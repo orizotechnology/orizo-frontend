@@ -158,7 +158,7 @@ export default function Products() {
 
               {/* Download button — full width */}
               <button
-                onClick={() => { window.location.href = "https://github.com/orizotechnology/orizo-frontend/releases/download/v1.0.0/Orizo.DQR.Setup.1.0.0.exe" }}
+                onClick={() => { window.location.href = "https://drive.google.com/uc?export=download&id=1ZgbK1m7bITAscwm-vOfv4CWipItY6ZTk" }}
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "7px",
                   background: C.blue, color: "#fff",
