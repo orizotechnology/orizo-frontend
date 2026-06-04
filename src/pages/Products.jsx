@@ -157,8 +157,8 @@ export default function Products() {
               <div style={{ height: "1px", background: "#f1f5f9", marginBottom: "14px", marginTop: "auto" }} />
 
               {/* Download button — full width */}
-              <button
-                onClick={() => { window.location.href = "https://drive.google.com/uc?export=download&id=1ZgbK1m7bITAscwm-vOfv4CWipItY6ZTk" }}
+              <a
+                href="/downloads/Orizo%20DQR%20Setup%201.0.0.exe"
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "7px",
                   background: C.blue, color: "#fff",
@@ -166,6 +166,7 @@ export default function Products() {
                   padding: "10px 0", borderRadius: "7px",
                   textDecoration: "none", border: "none",
                   cursor: "pointer", width: "100%",
+                  boxSizing: "border-box",
                   transition: "opacity 0.2s ease",
                 }}
                 onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
@@ -177,7 +178,7 @@ export default function Products() {
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 Download for Windows
-              </button>
+              </a>
 
             </motion.div>
 
