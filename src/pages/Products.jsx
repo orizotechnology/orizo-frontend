@@ -158,7 +158,7 @@ export default function Products() {
 
               {/* Download button — full width */}
               <a
-                href="/downloads/Orizo DQR Setup 1.0.0.exe"
+                href="https://github.com/orizotechnology/orizo-frontend/releases/download/v1.0.0/Orizo.DQR.Setup.1.0.0.exe"
                 download="Orizo DQR Setup 1.0.0.exe"
                 style={{
                   display: "flex", alignItems: "center", justifyContent: "center", gap: "7px",
