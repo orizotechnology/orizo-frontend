@@ -5,8 +5,14 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# ── Force download for exe files ──
+[[headers]]
+  for = "/downloads/*"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Content-Disposition = "attachment"
+
 # ── SPA routing fix ──
-# Without this, refreshing /about, /contact etc. returns a 404 on Netlify
 [[redirects]]
   from   = "/*"
   to     = "/index.html"
