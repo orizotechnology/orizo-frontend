@@ -12,9 +12,9 @@ const ease = [0.22, 1, 0.36, 1]
 
 const openings = [
   {
-    role: "Java Full Stack Developer",
+    role: "Java Full Stack Developer Intern",
     dept: "Engineering",
-    type: "Full-time",
+    type: "Internship",
     location: "Remote",
     exp: "Fresher / 0–1 year",
     tags: ["Java", "Spring Boot", "React", "MySQL", "REST APIs"],
@@ -34,9 +34,9 @@ const openings = [
     ],
   },
   {
-    role: "React Native Developer",
+    role: "React Native Developer Intern",
     dept: "Engineering",
-    type: "Full-time",
+    type: "Internship",
     location: "Remote",
     exp: "Fresher / 0–1 year",
     tags: ["React Native", "iOS", "Android", "TypeScript", "Expo"],
@@ -56,9 +56,9 @@ const openings = [
     ],
   },
   {
-    role: "Figma / UI Designer",
+    role: "Figma / UI Designer Intern",
     dept: "Design",
-    type: "Full-time",
+    type: "Internship",
     location: "Remote / Hybrid",
     exp: "Fresher / 0–1 year",
     tags: ["Figma", "UI Design", "Prototyping", "Design Systems", "UX Research"],
@@ -85,7 +85,7 @@ const deptColors = {
 }
 
 const typeColors = {
-  "Full-time": { bg: "#f0fdf4", color: "#16a34a" },
+  "Internship": { bg: "#fef3c7", color: "#d97706" },
 }
 
 function JobCard({ job, i }) {
@@ -255,6 +255,10 @@ export default function Career() {
             style={{ color: "rgba(255,255,255,0.5)", fontSize: "16px", lineHeight: 1.75, maxWidth: "460px" }}>
             We're a remote-first team building great software. If you're passionate
             about your craft and want to work on meaningful products — we'd love to hear from you.
+          </motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3, ease }}
+            style={{ color: C.blue, fontSize: "15px", fontWeight: 700, marginTop: "16px", letterSpacing: "0.3px" }}>
+            All are interns only
           </motion.p>
         </div>
       </div>

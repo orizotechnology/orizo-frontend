@@ -157,28 +157,16 @@ export default function Products() {
               <div style={{ height: "1px", background: "#f1f5f9", marginBottom: "14px", marginTop: "auto" }} />
 
               {/* Download button — full width */}
-              <a
-                href="/downloads/Orizo%20DQR%20Setup%201.0.0.exe"
-                style={{
-                  display: "flex", alignItems: "center", justifyContent: "center", gap: "7px",
-                  background: C.blue, color: "#fff",
-                  fontSize: "12.5px", fontWeight: 700,
-                  padding: "10px 0", borderRadius: "7px",
-                  textDecoration: "none", border: "none",
-                  cursor: "pointer", width: "100%",
-                  boxSizing: "border-box",
-                  transition: "opacity 0.2s ease",
-                }}
-                onMouseEnter={e => e.currentTarget.style.opacity = "0.88"}
-                onMouseLeave={e => e.currentTarget.style.opacity = "1"}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none"
-                  viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Download for Windows
-              </a>
+              <div style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                background: "#e2e8f0", color: C.navy,
+                fontSize: "12.5px", fontWeight: 700,
+                padding: "10px 0", borderRadius: "7px",
+                width: "100%",
+                boxSizing: "border-box",
+              }}>
+                Download currently unavailable
+              </div>
 
             </motion.div>
 

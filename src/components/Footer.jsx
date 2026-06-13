@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 const links = {
   Company: [
     { label: "About Us",  to: "/about"   },
-    { label: "Products",  to: "/products" },
     { label: "Careers",   to: "/career"  },
     { label: "Contact Us",to: "/contact" },
   ],
